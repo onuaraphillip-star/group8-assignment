@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --primary-50: #f0f9ff;
+    --primary-100: #e0f2fe;
+    --primary-200: #bae6fd;
+    --primary-300: #7dd3fc;
+    --primary-400: #38bdf8;
+    --primary-500: #0ea5e9;
+    --primary-600: #0284c7;
+    --primary-700: #0369a1;
+    --primary-800: #075985;
+    --primary-900: #0c4a6e;
+  }
+  
+  body {
+    @apply bg-gray-50 text-gray-900 antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 inline-flex items-center gap-2;
+  }
+  
+  .btn-primary {
+    @apply btn bg-primary-600 text-white hover:bg-primary-700 shadow-sm hover:shadow;
+  }
+  
+  .btn-secondary {
+    @apply btn bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 hover:border-gray-300;
+  }
+  
+  .btn-ghost {
+    @apply btn text-gray-600 hover:bg-gray-100;
+  }
+  
+  .panel {
+    @apply bg-white rounded-xl shadow-sm border border-gray-200;
+  }
+  
+  .panel-header {
+    @apply px-4 py-3 border-b border-gray-100 font-semibold text-gray-800 flex items-center gap-2;
+  }
+  
+  .input {
+    @apply px-3 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all;
+  }
+  
+  .select {
+    @apply input appearance-none bg-white cursor-pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+  }
+  
+  .badge {
+    @apply px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+  
+  .badge-blue {
+    @apply badge bg-blue-100 text-blue-700;
+  }
+  
+  .badge-green {
+    @apply badge bg-green-100 text-green-700;
+  }
+  
+  .badge-yellow {
+    @apply badge bg-yellow-100 text-yellow-700;
+  }
+  
+  .badge-purple {
+    @apply badge bg-purple-100 text-purple-700;
+  }
+  
+  .stat-card {
+    @apply p-4 bg-white rounded-xl border border-gray-100 shadow-sm;
+  }
+  
+  .tab {
+    @apply px-4 py-3 text-sm font-medium border-b-2 transition-colors;
+  }
+  
+  .tab-active {
+    @apply tab border-primary-600 text-primary-600;
+  }
+  
+  .tab-inactive {
+    @apply tab border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300;
+  }
+  
+  .tooltip {
+    @apply absolute z-50 px-2 py-1 text-xs text-white bg-gray-800 rounded shadow-lg pointer-events-none opacity-0 transition-opacity;
+  }
+  
+  .tooltip:hover {
+    @apply opacity-100;
+  }
+}
+
+/* ReactFlow custom styles */
+.react-flow__node {
+  @apply rounded-lg shadow-sm transition-all duration-300;
+}
+
+.react-flow__node-default {
+  @apply bg-white border-2 border-gray-300;
+}
+
+.react-flow__node.selected {
+  @apply ring-2 ring-primary-500 ring-offset-2;
+}
+
+.react-flow__edge-path {
+  @apply transition-all duration-300;
+}
+
+/* Monaco Editor */
+.monaco-editor {
+  @apply rounded-lg;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 rounded;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded hover:bg-gray-400;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  100% { transform: scale(1.2); opacity: 0; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Loading spinner */
+.spinner {
+  @apply w-5 h-5 border-2 border-gray-200 border-t-primary-600 rounded-full animate-spin;
+}
+
+/* Glass effect */
+.glass {
+  @apply bg-white/80 backdrop-blur-sm;
+}
+
+/* Gradient backgrounds */
+.gradient-primary {
+  background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-700) 100%);
+}
+
+.gradient-success {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+}
+
+.gradient-warning {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}

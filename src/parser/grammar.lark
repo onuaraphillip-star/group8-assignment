@@ -1,0 +1,74 @@
+// PDDL 1.2 STRIPS + Typing Grammar
+
+?start: domain | problem
+
+// ============ DOMAIN ============
+domain: "(" "define" "(" "domain" NAME ")" domain_body ")"
+
+domain_body: [requirements] [types] [constants] [predicates] [actions]
+
+requirements: ":requirements" requirement*
+requirement: ":strips" | ":typing" | ":negative-preconditions" | ":equality"
+
+types: ":types" typed_name_list
+
+constants: ":constants" typed_name_list
+
+predicates: ":predicates" predicate_def*
+
+predicate_def: "(" NAME typed_var_list ")"
+
+actions: action*
+
+action: "(" ":action" NAME 
+        ":parameters" "(" typed_var_list ")"
+        [":precondition" formula]
+        [":effect" effect_formula]
+        ")"
+
+// ============ PROBLEM ============
+problem: "(" "define" "(" "problem" NAME ")"
+         "(" ":domain" NAME ")"
+         problem_body ")"
+
+problem_body: [requirements] [objects] init goal
+
+objects: ":objects" typed_name_list
+
+init: ":init" atomic_formula*
+
+goal: ":goal" formula
+
+// ============ FORMULAS ============
+formula: atomic_formula
+       | "(" "and" formula* ")"
+       | "(" "not" formula ")"
+       | "(" "or" formula* ")"
+       | "(" "=" term term ")"
+
+effect_formula: atomic_formula
+              | "(" "and" effect_formula* ")"
+              | "(" "not" atomic_formula ")"
+              | "(" "forall" "(" typed_var_list ")" effect_formula ")"
+              | "(" "when" formula effect_formula ")"
+
+atomic_formula: "(" NAME term* ")"
+              | "(" "=" term term ")"
+
+term: NAME | VAR
+
+// ============ LISTS ============
+typed_name_list: (NAME+ "-" type)* NAME*
+typed_var_list: (VAR+ "-" type)* VAR*
+
+type: NAME | "(" "either" NAME+ ")"
+
+// ============ TERMINALS ============
+NAME: /[a-zA-Z][a-zA-Z0-9_-]*/
+VAR: /\?[a-zA-Z][a-zA-Z0-9_-]*/
+
+%import common.WS
+%ignore WS
+
+%import common.SH_COMMENT
+%ignore SH_COMMENT
